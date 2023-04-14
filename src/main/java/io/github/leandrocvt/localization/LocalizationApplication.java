@@ -21,7 +21,7 @@ public class LocalizationApplication implements CommandLineRunner {
 
 	void listCityByName(){
 		cityRepository.findByName("Recife").forEach(System.out::println);
-		cityRepository.findByNameContaining("a").forEach(System.out::println);
+		cityRepository.findByNameLike("PORTO%").forEach(System.out::println);
 	}
 
 	void listByPopulation(){
