@@ -2,11 +2,14 @@ package io.github.leandrocvt.localization.domain.service;
 
 import io.github.leandrocvt.localization.domain.entities.City;
 import io.github.leandrocvt.localization.domain.repository.CityRepository;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CityService {
@@ -37,5 +40,14 @@ public class CityService {
 
     public void listCity(){
         cityRepository.findAll().forEach(System.out::println);
+    }
+
+    public List<City> dynamicFilter(City city){
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
+        Example<City> example = Example.of(city, matcher);
+        return cityRepository.findAll(example);
     }
 }
