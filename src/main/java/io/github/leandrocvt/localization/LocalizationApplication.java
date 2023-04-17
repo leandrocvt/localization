@@ -14,8 +14,7 @@ public class LocalizationApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		var city = new City(1L, "São Paulo", 100L);
-		cityService.listCitySpecsDynamicFilter(city);
+		cityService.listCityByNameSql();
 	}
 
 	public static void main(String[] args) {

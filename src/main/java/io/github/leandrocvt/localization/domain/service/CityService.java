@@ -32,6 +32,13 @@ public class CityService {
         cityRepository.findByPopulationLessThanAndNameLike(500000L, "Fo%").forEach(System.out::println);
     }
 
+    public void listCityByNameSql(){
+        Pageable pageable = PageRequest.of(1, 4);
+        cityRepository.findByNameSqlNative("São Paulo")
+                .stream().map(cityProjection -> new City(cityProjection.getId(), cityProjection.getName(), null))
+                .forEach(System.out::println);
+    }
+
     public void listCityByName(){
         Pageable pageable = PageRequest.of(1, 4);
         cityRepository.findByNameLike("%%%", pageable).forEach(System.out::println);
